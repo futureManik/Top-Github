@@ -2,8 +2,9 @@ package com.example.top_github.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class Repo {
+class Repo :Serializable{
 
     @SerializedName("name")
     @Expose
