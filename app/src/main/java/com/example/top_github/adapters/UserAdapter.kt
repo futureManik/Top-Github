@@ -1,8 +1,9 @@
 package com.example.top_github.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +11,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.top_github.R
+import com.example.top_github.cache.ImagesCache
 import com.example.top_github.models.User
+import com.example.top_github.views.MainActivity
 import com.example.top_github.views.UserDetailActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+
 
 class UserAdapter(private val context: Context, private val userList: List<User>?) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
 
-        val view = LayoutInflater.from(context).inflate(R.layout.user_list_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(com.example.top_github.R.layout.user_list_item, parent, false)
 
         return UserViewHolder(view)
     }
@@ -28,6 +35,11 @@ class UserAdapter(private val context: Context, private val userList: List<User>
         holder.name.text = userList?.get(position)?.name ?: "Error"
         holder.username.text = userList?.get(position)?.username ?: "Error"
 
+//        ImageLoadTask(userList?.get(position)?.avatar,holder.avatar).execute()
+//        ImagesCache.getInstance().addBitmapToMemoryCache(userList?.get(position)?.avatar,userList?.get(position)?.avatar)
+
+
+        ImagesCache.getInstance().setImage(context as MainActivity,userList?.get(position)?.avatar!!,holder.avatar)
     }
 
     override fun getItemCount(): Int {
@@ -47,4 +59,5 @@ class UserAdapter(private val context: Context, private val userList: List<User>
             }
         }
     }
+
 }
