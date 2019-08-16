@@ -34,12 +34,11 @@ class UserAdapter(private val context: Context, private val userList: List<User>
 
         holder.name.text = userList?.get(position)?.name ?: "Error"
         holder.username.text = userList?.get(position)?.username ?: "Error"
-
-//        ImageLoadTask(userList?.get(position)?.avatar,holder.avatar).execute()
-//        ImagesCache.getInstance().addBitmapToMemoryCache(userList?.get(position)?.avatar,userList?.get(position)?.avatar)
-
-
-        ImagesCache.getInstance().setImage(context as MainActivity,userList?.get(position)?.avatar!!,holder.avatar)
+        ImagesCache.getInstance().setImage(
+            context as MainActivity,
+            userList?.get(position)?.avatar!!,
+            holder.avatar
+        )
     }
 
     override fun getItemCount(): Int {

@@ -16,7 +16,7 @@ class ImagesCache {
 
     private var mMemoryCache: LruCache<String, Bitmap>? = null
 
-    val memoryCache: LruCache<String, Bitmap>
+    private val memoryCache: LruCache<String, Bitmap>
         get() {
             if (mMemoryCache == null) {
                 val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()
