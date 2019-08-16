@@ -33,7 +33,7 @@ class ImagesCache {
 
     fun setImage(activity: Activity, url: String?, imageView: ImageView) {
         GlobalScope.launch {
-            var bitmap: Bitmap? = null
+            var bitmap: Bitmap?
 
             if (getImageFromMemCache(url!!) == null) {
                 bitmap = getBitmapFromURL(url)

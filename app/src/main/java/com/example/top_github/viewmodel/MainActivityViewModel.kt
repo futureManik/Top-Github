@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 import com.example.top_github.models.User
 import com.example.top_github.models.UserRepository
 
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel(userRepository: UserRepository) : ViewModel() {
 
-    private val userRepository: UserRepository = UserRepository()
+    private val userRepository = userRepository
 
-     val allUsers: LiveData<List<User>>
+    val allUsers: LiveData<List<User>>
         get() = userRepository.getMutableLiveData()
 
 }

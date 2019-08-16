@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.top_github.R
 import com.example.top_github.adapters.UserAdapter
+import com.example.top_github.di.Injector
+import com.example.top_github.di.MainActivityViewModelFactory
 import com.example.top_github.models.User
 import com.example.top_github.service.RetrofitInstance
 import com.example.top_github.viewmodel.MainActivityViewModel
@@ -16,17 +18,24 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     private var gitUsers: List<User>? = null
     private var mainActivityViewModel: MainActivityViewModel? = null
 
+    @Inject
+    lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        Injector.instance.userComponent.inject(this)
+
+        mainActivityViewModel =
+            ViewModelProviders.of(this, mainActivityViewModelFactory).get(MainActivityViewModel::class.java)
 
         getGitUsers()
     }
